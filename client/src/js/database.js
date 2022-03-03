@@ -1,7 +1,11 @@
 import { openDB } from 'idb';
 
+const dbName = "jate";
+const storeName = "jate";
+const contentKey = 1;
+
 const initdb = async () =>
-  openDB('jate', 1, {
+  openDB(dbName, 1, {
     upgrade(db) {
       if (db.objectStoreNames.contains('jate')) {
         console.log('jate database already exists');
@@ -13,7 +17,12 @@ const initdb = async () =>
   });
 
 // TODO: Add logic to a method that accepts some content and adds it to the database
-export const putDb = async (content) => console.error('putDb not implemented');
+export const putDb = async (content) => {
+  const db = await openDB(dbName);
+  const store = db.transaction(storeName, 'readwrite').objectStore(storeName);
+  const key = await store.put({content, id: contentKey})
+  console.log('Inserted content with key ', key, 'data: ', content)
+};
 
 // TODO: Add logic for a method that gets all the content from the database
 export const getDb = async () => console.error('getDb not implemented');
