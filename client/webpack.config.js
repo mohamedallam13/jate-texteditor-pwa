@@ -38,7 +38,7 @@ module.exports = () => {
         background_color: '#7eb4e2',
         theme_color: '#7eb4e2',
         crossorigin: 'use-credentials',
-        start_url: '/',
+        start_url: './',
         publicPath: '/',
         fingerprints: false,
         icons: [
